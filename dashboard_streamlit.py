@@ -121,7 +121,7 @@ def main():
     st.write("")
     st.write("")
 
-    st.subheader('Select Deshu to be together in the same group', divider='rainbow')
+    st.subheader('Select Deshu to be together in the same group [Optional]', divider='rainbow')
     # Create two dropdowns for selecting groups
     selected_group_1 = st.selectbox('Select 1st Deshu:', deshu_list)
     selected_group_2 = st.selectbox('Select 2nd Deshu:', deshu_list)
@@ -134,7 +134,7 @@ def main():
     st.write("")
 
     # Display the selected groups in the edge
-    st.subheader('Currently Selected Deshu Pairing (In Same Group)', divider='rainbow')
+    st.subheader('Current Selected Deshu Pairing (To Be In Same Group)', divider='rainbow')
     i = 0
     if st.session_state.deshu_group_edge == []:
         st.write("No Deshus to be put together!")
@@ -146,7 +146,7 @@ def main():
     st.write("")
     st.write("")
 
-    st.subheader('Classification Results Below', divider='rainbow')
+    st.subheader('Classification Results', divider='rainbow')
     groups = st.session_state.deshu_name
     sizes = st.session_state.deshu_size
     bus_names = st.session_state.grouping_name
