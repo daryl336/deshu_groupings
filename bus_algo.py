@@ -91,6 +91,7 @@ def print_results(allocations, assigned_groups, remaining_capacities, bus_names,
 
 def streamlit_main(groups, sizes, bus_names, bus_capacities, bus_edges):
     # Convert sizes to integers
+    sizes = list(map(int, sizes))
     bus_capacities = list(map(int, bus_capacities))
     # Create a graph to represent group pairings
     group_graph = nx.Graph()
