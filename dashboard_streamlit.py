@@ -148,11 +148,6 @@ def main():
     bus_capacities = st.session_state.grouping_capacity
     bus_edges = st.session_state.deshu_group_edge
 
-    st.write(groups)
-    st.write(sizes)
-    st.write(bus_names)
-    st.write(bus_capacities)
-    st.write(bus_edges)
     if groups and sizes and bus_names and bus_capacities:
         allocations, assigned_groups, remaining_capacities, bus_names, groups = streamlit_main(groups, sizes, bus_names, bus_capacities, bus_edges)
         streamlit_write_results(allocations, assigned_groups, remaining_capacities, bus_names, groups)
