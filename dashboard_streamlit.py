@@ -39,6 +39,11 @@ def load_grouping_capacity_file(uploaded_file):
     with st.spinner("Loading {} ...".format(file_name)):
         temp_dir = tempfile.TemporaryDirectory()
         temp_filepath = os.path.join(temp_dir.name,file_name)
+
+         # Save the uploaded file to the temporary directory
+        with open(temp_filepath, 'wb') as f:
+            f.write(uploaded_file.getvalue())
+            
         if '.csv' in file_name:
             with open(temp_filepath, 'r', encoding='utf-8-sig') as file:
                 reader = csv.reader(file)
