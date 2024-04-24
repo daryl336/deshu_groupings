@@ -134,7 +134,7 @@ def main():
     st.write("")
 
     # Display the selected groups in the edge
-    st.subheader('Deshu Pairing (In Same Group)', divider='rainbow')
+    st.subheader('Currently Selected Deshu Pairing (In Same Group)', divider='rainbow')
     i = 0
     if st.session_state.deshu_group_edge == []:
         st.write("No Deshus to be put together!")
