@@ -92,13 +92,21 @@ def main():
 
     st.set_page_config(page_title="Suggested Grouping Classification", layout="wide")    
     st.title("Suggested Grouping Classification")
+    st.subheader('Instructions!', divider='rainbow')
+    st.write("Step 1 : Download the template files and fill up the details.")
+    st.write("Step 2 : Upload the correct CSV files at the correct section.")
+    st.write("Step 3 : [Optional] Select the Deshus that needs to be together in the same group.")
+    st.write("Step 4: If the above steps are done correctly, the suggested results will be generated below.")
+
+    st.write("")
+    st.write("")
+
     st.subheader('Download Template Files here!', divider='rainbow')
     if st.button('Download Deshu Counts CSV file'):
         download_csv(sample_deshu_data, 'deshu_counts')
     if st.button('Download Group Capacity CSV file'):
         download_csv(sample_group_data, 'capacities')
     
-    st.write("")
     st.write("")
     st.write("")
 
@@ -110,7 +118,6 @@ def main():
     if grouping_counts:
         load_grouping_capacity_file(grouping_counts)
 
-    st.write("")
     st.write("")
     st.write("")
 
@@ -125,7 +132,6 @@ def main():
 
     st.write("")
     st.write("")
-    st.write("")
 
     # Display the selected groups in the edge
     st.subheader('Deshu Pairing (In Same Group)', divider='rainbow')
@@ -137,7 +143,6 @@ def main():
             i = i + 1
             st.write(f'Pair {i} : ', pair[0] + ' & ' + pair[1])
     
-    st.write("")
     st.write("")
     st.write("")
 
