@@ -97,7 +97,8 @@ def streamlit_main(groups, sizes, bus_names, bus_capacities, bus_edges):
     # Add nodes to the graph
     group_graph.add_nodes_from(groups)
     # Add edges to the graph
-    group_graph.add_edges_from(bus_edges)
+    if bus_edges != []:
+        group_graph.add_edges_from(bus_edges)
     allocations, assigned_groups, remaining_capacities = allocate_to_buses(groups, sizes, list(bus_capacities), group_graph)
     return allocations, assigned_groups, remaining_capacities, bus_names, groups
 

@@ -43,7 +43,7 @@ def load_grouping_capacity_file(uploaded_file):
          # Save the uploaded file to the temporary directory
         with open(temp_filepath, 'wb') as f:
             f.write(uploaded_file.getvalue())
-            
+
         if '.csv' in file_name:
             with open(temp_filepath, 'r', encoding='utf-8-sig') as file:
                 reader = csv.reader(file)
@@ -146,8 +146,9 @@ def main():
     sizes = st.session_state.deshu_size
     bus_names = st.session_state.grouping_name
     bus_capacities = st.session_state.grouping_capacity
+    bus_edges = st.session_state.deshu_group_edge
     if groups and sizes and bus_names and bus_capacities:
-        allocations, assigned_groups, remaining_capacities, bus_names, groups = streamlit_main(groups, sizes, bus_names, bus_capacities)
+        allocations, assigned_groups, remaining_capacities, bus_names, groups = streamlit_main(groups, sizes, bus_names, bus_capacities, bus_edges)
         streamlit_write_results(allocations, assigned_groups, remaining_capacities, bus_names, groups)
     else:
         st.write("Please insert the corresponding files!")
