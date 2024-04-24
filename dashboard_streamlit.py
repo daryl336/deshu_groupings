@@ -166,6 +166,7 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
             name = bus_names[bus-1]
             st.write(f"{name} - Allocated groups: {allocated_groups}")
         else:
+            name = bus_names[bus-1]
             st.write(f"{name} - No groups allocated")
     # Calculate unassigned groups
     unassigned_groups = set(groups) - assigned_groups
