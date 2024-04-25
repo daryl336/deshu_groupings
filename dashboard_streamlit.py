@@ -24,8 +24,12 @@ def load_deshu_counts_file(uploaded_file):
         if file_name.endswith('.csv'):
             with open(temp_filepath, 'r', encoding='utf-8-sig') as file:
                 reader = csv.reader(file)
-                groups = next(reader)
-                sizes = next(reader)
+                data = list(reader)
+
+                # Transpose the data to read values from columns
+                transposed_data = list(zip(*data))
+                groups = list(transposed_data[0][1:])
+                sizes = list(transposed_data[1][1:])
                 # Keep the copy in session_state
                 st.session_state.deshu_counts_file = reader
                 st.session_state.deshu_name = groups
@@ -47,8 +51,12 @@ def load_grouping_capacity_file(uploaded_file):
         if '.csv' in file_name:
             with open(temp_filepath, 'r', encoding='utf-8-sig') as file:
                 reader = csv.reader(file)
-                bus_names = next(reader)
-                bus_capacities = next(reader)
+                data = list(reader)
+                # Transpose the data to read values from columns
+                transposed_data = list(zip(*data))
+                bus_names = list(transposed_data[0][1:])
+                bus_capacities = list(transposed_data[1][1:])
+
                 # Keep the copy in session_state
                 st.session_state.grouping_capacity_file = reader
                 st.session_state.grouping_name = bus_names
@@ -90,9 +98,11 @@ def main():
     deshu_list = ['1. 忠恕德 (忠德)','1A. 忠恕德 (恕德)','2. 明德','3. 宽德','4. 孝德','5. 仁德','6. 慈德','7. 信忍德 (信德)','7A. 信忍德 (忍德)','8. 公德','9. 博德 (义)','9A. 博德 (三)','10. 廉德','11. 爱德','12. 智德','13. 觉德','14. 节德','15. 俭德','16. 悌德','17. 正义德 (正德)','17A. 正义德 (义德)','18. 真德','19. 礼德','20. 敬德','21. 耻德','22. 温德','23. 良德','24. 和德','25. 峇淡','26. 廖内']
     sample_deshu_data = pd.DataFrame(dict(zip(deshu_list,[[30] for i in range(len(deshu_list))])))
 
+    sample_group_data = pd.DataFrame({'group_names' : [f"Group {i}" for i in range(1,11)],'max_capacities' : [30 for i in range(1,11)]})
+    sample_deshu_data = pd.DataFrame({'deshu_names' : deshu_list,'counts' : [30 for i in range(len(deshu_list))]})
     st.set_page_config(page_title="Suggested Grouping Classification", layout="wide")    
     st.title("Suggested Grouping Classification")
-    st.subheader('Instructions!', divider='rainbow')
+    st.subheader('Instructions!', divider='rainbow')    
     st.write("Step 1 : Download the template files and fill up the details.")
     st.write("Step 2 : Upload the correct CSV files at the correct section.")
     st.write("Step 3 : [Optional] Select the Deshus that needs to be together in the same group.")
