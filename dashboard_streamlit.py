@@ -174,15 +174,20 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
     for bus, allocated_groups in allocations.items():
         if allocated_groups:
             name = bus_names[bus-1]
-            st.write(f"{name} - Allocated groups: {allocated_groups}")
+            count = 0
+            res = f"{name} -"
+            for i in allocated_groups:
+                res = res + i[0] + ' '
+                count = count + i[1]
+            st.write(res + ", Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus]))
+            st.write("")
         else:
             name = bus_names[bus-1]
             st.write(f"{name} - No groups allocated")
+            st.write("")
     # Calculate unassigned groups
     unassigned_groups = set(groups) - assigned_groups
-    st.write(f"Unassigned groups: {list(unassigned_groups)}")
-    # Print remaining capacities
-    st.write(f"Remaining Capacities: {remaining_capacities}")
+    st.write(f"Unassigned Deshu: {list(unassigned_groups)}")
 
 if __name__ == "__main__":
     main()
