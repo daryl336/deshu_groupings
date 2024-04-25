@@ -94,9 +94,9 @@ def main():
     if 'deshu_group_edge' not in st.session_state:
         st.session_state.deshu_group_edge = []
     # Sample data
-    sample_group_data = pd.DataFrame(dict(zip([f"Group {i}" for i in range(1,10)],[[30] for i in range(1,10)])))
     deshu_list = ['1. 忠恕德 (忠德)','1A. 忠恕德 (恕德)','2. 明德','3. 宽德','4. 孝德','5. 仁德','6. 慈德','7. 信忍德 (信德)','7A. 信忍德 (忍德)','8. 公德','9. 博德 (义)','9A. 博德 (三)','10. 廉德','11. 爱德','12. 智德','13. 觉德','14. 节德','15. 俭德','16. 悌德','17. 正义德 (正德)','17A. 正义德 (义德)','18. 真德','19. 礼德','20. 敬德','21. 耻德','22. 温德','23. 良德','24. 和德','25. 峇淡','26. 廖内']
-    sample_deshu_data = pd.DataFrame(dict(zip(deshu_list,[[30] for i in range(len(deshu_list))])))
+    #sample_group_data = pd.DataFrame(dict(zip([f"Group {i}" for i in range(1,10)],[[30] for i in range(1,10)])))
+    #sample_deshu_data = pd.DataFrame(dict(zip(deshu_list,[[30] for i in range(len(deshu_list))])))
 
     sample_group_data = pd.DataFrame({'group_names' : [f"Group {i}" for i in range(1,11)],'max_capacities' : [30 for i in range(1,11)]})
     sample_deshu_data = pd.DataFrame({'deshu_names' : deshu_list,'counts' : [30 for i in range(len(deshu_list))]})
@@ -171,6 +171,9 @@ def main():
 
 def streamlit_write_results(allocations, assigned_groups, remaining_capacities, bus_names, groups):
     # Print the results
+    deshu = []
+    deshu_count = []
+    group = []
     for bus, allocated_groups in allocations.items():
         if allocated_groups:
             name = bus_names[bus-1]
@@ -179,16 +182,29 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
             for i in allocated_groups:
                 res = res + i[0] + ' '
                 count = count + i[1]
+
+                deshu.append(i[0])
+                deshu_count.append(i[1])
+                group.append(name)
+
             st.write(res)
             st.write("Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus]))
             st.write("")
         else:
             name = bus_names[bus-1]
-            st.write(f"{name} - No groups allocated")
+            st.write(f"{name} - No Deshu allocated")
             st.write("")
     # Calculate unassigned groups
     unassigned_groups = set(groups) - assigned_groups
     st.write(f"Unassigned Deshu: {list(unassigned_groups)}")
+    for j in unassigned_groups:
+        deshu.append(i[0])
+        deshu_count.append(i[1])
+        group.append('unassigned')
+    final_result = pd.DataFrame({'Deshu' : deshu,'Deshu Count' : deshu_count, 'Assigned Group' : group})
+    if st.button('Download Suggested Classification Results'):
+        download_csv(final_result, 'Suggested Classification Results')
+    
 
 if __name__ == "__main__":
     main()
