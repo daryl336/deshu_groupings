@@ -180,6 +180,7 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
                 res = res + i[0] + ' '
                 count = count + i[1]
             st.write(res + ", Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus]))
+            st.write("Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus]))
             st.write("")
         else:
             name = bus_names[bus-1]
