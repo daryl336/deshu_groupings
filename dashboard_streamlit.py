@@ -120,7 +120,7 @@ def main():
     if st.button('Download Deshu Counts CSV file'):
         download_csv(sample_deshu_data, 'deshu_counts')
     st.write("Group Capacity CSV file - Contains the maximum number of pax within each group. Group can refers to Camp Group, or a room, or a bus.")
-    st.write("You are free to use any names for the groups, and no maximum number of the group. (i.e. Group 1, Group 2, ... , Group 10 OR Room 401 , ... , Room 502 OR Bus 1 , ... , Bus 10)")
+    st.write("You are free to use any names for the groups, and no maximum number of the group. (i.e. Group 1, Group 2, ... , Group 10   OR   Room 401 , ... , Room 502   OR   Bus 1 , ... , Bus 10)")
     if st.button('Download Group Capacity CSV file'):
         download_csv(sample_group_data, 'capacities')
     
@@ -187,7 +187,7 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
             count = 0
             res = f"{name} -"
             for i in allocated_groups:
-                res = res + i[0] + ' '
+                res = res + i[0] + '   '
                 count = count + i[1]
 
                 deshu.append(i[0])
