@@ -207,7 +207,7 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
     for j in unassigned_groups:
         deshu.append(j)
         deshu_count.append(st.session_state.deshu_dictionary[j])
-        group.append('unassigned')
+        group.append('Unassigned')
     final_result = pd.DataFrame({'Deshu' : deshu,'Deshu Count' : deshu_count, 'Assigned Group' : group})
     if st.button('Download Suggested Classification Results'):
         download_csv(final_result, 'Suggested Classification Results')
