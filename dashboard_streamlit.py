@@ -34,6 +34,8 @@ def load_deshu_counts_file(uploaded_file):
                 st.session_state.deshu_counts_file = reader
                 st.session_state.deshu_name = groups
                 st.session_state.deshu_size = sizes 
+                st.session_state.deshu_dictionary = dict(zip(groups,sizes))
+                st.write(dict(zip(groups,sizes)))
         else:
             st.error('Please upload the correct csv file!', icon="🚨")
 
@@ -81,6 +83,9 @@ def main():
     # sizes
     if 'deshu_size' not in st.session_state:
         st.session_state.deshu_size = None
+    # capacities.csv
+    if 'deshu_dictionary' not in st.session_state:
+        st.session_state.deshu_dictionary = None
     # capacities.csv
     if 'grouping_capacity_file' not in st.session_state:
         st.session_state.grouping_capacity_file = None
@@ -198,8 +203,8 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
     unassigned_groups = set(groups) - assigned_groups
     st.write(f"Unassigned Deshu: {list(unassigned_groups)}")
     for j in unassigned_groups:
-        deshu.append(i[0])
-        deshu_count.append(i[1])
+        deshu.append(j[0])
+        deshu_count.append(st.session_state.deshu_dictionary[j[0]])
         group.append('unassigned')
     final_result = pd.DataFrame({'Deshu' : deshu,'Deshu Count' : deshu_count, 'Assigned Group' : group})
     if st.button('Download Suggested Classification Results'):
