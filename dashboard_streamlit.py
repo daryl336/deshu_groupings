@@ -195,7 +195,7 @@ def streamlit_write_results(allocations, assigned_groups, remaining_capacities, 
                 group.append(name)
 
             st.write(res)
-            st.write("Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus]))
+            st.write("Total : "+str(count) + ", Remaining Capacity : " + str(remaining_capacities[bus-1]))
             st.write("")
         else:
             name = bus_names[bus-1]
