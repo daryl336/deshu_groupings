@@ -35,7 +35,6 @@ def load_deshu_counts_file(uploaded_file):
                 st.session_state.deshu_name = groups
                 st.session_state.deshu_size = sizes 
                 st.session_state.deshu_dictionary = dict(zip(groups,sizes))
-                st.write(dict(zip(groups,sizes)))
         else:
             st.error('Please upload the correct csv file!', icon="🚨")
 
@@ -116,9 +115,12 @@ def main():
     st.write("")
     st.write("")
 
-    st.subheader('Download Template Files here!', divider='rainbow')
+    st.subheader('Download Template Files here! Do not amend the table headers!', divider='rainbow')
+    st.write("Deshu Counts CSV file - Contains the number of pax within each Deshu. (e.g. Camp Participants, TWJX Participants, 乾道 for Room arrangement)")
     if st.button('Download Deshu Counts CSV file'):
         download_csv(sample_deshu_data, 'deshu_counts')
+    st.write("Group Capacity CSV file - Contains the maximum number of pax within each group. Group can refers to Camp Group, or a room, or a bus.")
+    st.write("You are free to use any names for the groups, and no maximum number of the group. (i.e. Group 1, Group 2, ... , Group 10 OR Room 401 , ... , Room 502 OR Bus 1 , ... , Bus 10)")
     if st.button('Download Group Capacity CSV file'):
         download_csv(sample_group_data, 'capacities')
     
